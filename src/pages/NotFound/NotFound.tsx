@@ -1,6 +1,6 @@
-import { ReactLink, LinkWrap } from './MovieDetails.styled';
+import { LinkWrap, ReactLink } from 'pages/MovieDetails/MovieDetails.styled';
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <>
       <h2>Sorry, page not found</h2>

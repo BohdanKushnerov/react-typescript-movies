@@ -4,20 +4,27 @@ import FilmList from 'components/FilmList/FilmList';
 import Status from 'services/Constants';
 import { Section } from './Home.styled';
 
-const Home = () => {
-  const [state, setState] = useState([]);
+interface FilmsState {
+  id: number;
+  original_title: string;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+}
+
+const Home: React.FC = () => {
+  const [films, setFilms] = useState<FilmsState[]>([]);
   const [status, setStatus] = useState(Status.IDLE);
 
   useEffect(() => {
     const abortController = new AbortController();
 
-    // IIFE
     (async function fetchFilms() {
       setStatus(Status.PENDING);
       try {
         const trandFilms = await fetchTrending(abortController);
 
-        setState([...trandFilms]);
+        setFilms([...trandFilms]);
         setStatus(Status.RESOLVED);
       } catch (error) {
         setStatus(Status.REJECTED);
@@ -32,10 +39,10 @@ const Home = () => {
 
   return (
     <Section>
-      {state.length !== 0 && (
+      {films.length !== 0 && (
         <>
           <h2>Tranding today</h2>
-          <FilmList state={state}></FilmList>
+          <FilmList films={films}></FilmList>
         </>
       )}
       {status === Status.REJECTED && (

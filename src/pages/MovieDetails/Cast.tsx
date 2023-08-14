@@ -4,27 +4,34 @@ import { fetchMovieCredits } from 'services/FetchFunctions';
 import CastList from 'components/CastList/CastList';
 import Status from 'services/Constants';
 
-const Cast = () => {
-  const [state, setState] = useState([]);
+type CastState = {
+  id: number;
+  name: string;
+  profile_path: string;
+};
+
+const Cast: React.FC = () => {
+  const [castState, setCastState] = useState<CastState[]>([]);
   const [status, setStatus] = useState(Status.IDLE);
   const { movieId } = useParams();
 
   useEffect(() => {
     const abortController = new AbortController();
 
-    // IIFE
-    (async function fetch() {
+    const fetchCast = async () => {
       setStatus(Status.PENDING);
       try {
         const moviesCredits = await fetchMovieCredits(movieId, abortController);
 
-        setState([...moviesCredits]);
+        setCastState([...moviesCredits]);
         setStatus(Status.RESOLVED);
       } catch (error) {
         setStatus(Status.REJECTED);
         console.log(error);
       }
-    })();
+    };
+
+    fetchCast();
 
     return () => {
       abortController.abort();
@@ -33,8 +40,8 @@ const Cast = () => {
 
   return (
     <section>
-      {status === Status.RESOLVED && <CastList state={state}></CastList>}
-      {!state.length && status === Status.RESOLVED && (
+      {status === Status.RESOLVED && <CastList state={castState}></CastList>}
+      {!castState.length && status === Status.RESOLVED && (
         <h2>We don't have any cast added to this movie</h2>
       )}
       {status === Status.REJECTED && (

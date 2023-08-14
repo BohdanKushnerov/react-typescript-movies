@@ -13,8 +13,22 @@ import {
   ReactLinkList,
 } from './MovieDetails.styled';
 
-const MovieDetails = () => {
-  const [state, setState] = useState({});
+type MovieDetailsState = {
+  genres: string;
+  overview: string;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+};
+
+const MovieDetails: React.FC = () => {
+  const [state, setState] = useState<MovieDetailsState>({
+    genres: '',
+    overview: '',
+    poster_path: '',
+    title: '',
+    vote_average: 0,
+  });
   const [status, setStatus] = useState(Status.IDLE);
   const { movieId } = useParams();
   const location = useLocation();
@@ -23,13 +37,15 @@ const MovieDetails = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    // IIFE
     (async function fetch() {
       setStatus(Status.PENDING);
       try {
         const movie = await fetchMovie(movieId, abortController);
 
-        setState({ ...movie });
+        setState(prev => ({
+          ...prev,
+          ...movie,
+        }));
         setStatus(Status.RESOLVED);
       } catch (error) {
         setStatus(Status.REJECTED);
@@ -41,7 +57,7 @@ const MovieDetails = () => {
     return () => {
       abortController.abort();
     };
-  }, [movieId]);
+  }, [movieId, setState]);
 
   return (
     <>

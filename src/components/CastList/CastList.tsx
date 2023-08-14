@@ -1,7 +1,16 @@
-import PropTypes from 'prop-types';
 import { CreditsList, CreditsItem, Name } from './CastList.styled';
 
-const CastList = ({ state }) => {
+type CastProps = {
+  state: CastItem[];
+};
+
+type CastItem = {
+  id: number;
+  name: string;
+  profile_path: string;
+};
+
+const CastList: React.FC<CastProps> = ({ state }) => {
   return (
     <CreditsList>
       {state.map(({ profile_path, name, id }) => {
@@ -14,16 +23,6 @@ const CastList = ({ state }) => {
       })}
     </CreditsList>
   );
-};
-
-CastList.propTypes = {
-  state: PropTypes.arrayOf(
-    PropTypes.shape({
-      profile_path: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
 };
 
 export default CastList;

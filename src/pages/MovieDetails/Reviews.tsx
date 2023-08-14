@@ -4,15 +4,21 @@ import { fetchReviews } from 'services/FetchFunctions';
 import ReviewList from 'components/ReviewList/ReviewList';
 import Status from 'services/Constants';
 
-const Reviews = () => {
-  const [state, setState] = useState([]);
+type ReviewsState = {
+  author: string;
+  content: string;
+  id: string;
+  url: string;
+};
+
+const Reviews: React.FC = () => {
+  const [state, setState] = useState<ReviewsState[]>([]);
   const [status, setStatus] = useState(Status.IDLE);
   const { movieId } = useParams();
 
   useEffect(() => {
     const abortController = new AbortController();
 
-    // IIFE
     (async function fetch() {
       setStatus(Status.PENDING);
       try {

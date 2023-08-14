@@ -6,15 +6,23 @@ import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
 import Status from 'services/Constants';
 
-const Movies = () => {
+interface Film {
+  id: number;
+  original_title: string;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+}
+
+const Movies: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Film[]>([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filmName = searchParams.get('search');
 
-  const handleSubmit = value => {
+  const handleSubmit = (value: string) => {
     setSearchParams({ search: value });
   };
 
@@ -61,7 +69,7 @@ const Movies = () => {
           </section>
           <section>
             {loading && <Loader />}
-            {status === Status.RESOLVED && <FilmList state={data}></FilmList>}
+            {status === Status.RESOLVED && <FilmList films={data}></FilmList>}
             {!data.length && status === Status.RESOLVED && (
               <h2>There are no movies that matched your query.</h2>
             )}

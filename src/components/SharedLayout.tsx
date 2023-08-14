@@ -8,7 +8,7 @@ import {
   Header,
 } from './ShaderLayout.styled';
 
-const SharedLayout = () => {
+const SharedLayout: React.FC = () => {
   return (
     <>
       <Header>
