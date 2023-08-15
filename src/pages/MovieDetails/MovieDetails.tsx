@@ -1,10 +1,9 @@
 import { useRef, useEffect, useState, Suspense } from 'react';
 import { useParams, useLocation, Outlet } from 'react-router-dom';
-import { fetchMovie } from 'services/FetchFunctions';
+import fetchMovie from 'services/fetchMovie';
 import Movie from 'components/Movie/Movie';
 import Loader from 'components/Loader/Loader';
-import Status from 'services/Constants';
-
+import Status from 'constants/constants';
 import {
   ReactLink,
   Item,

@@ -1,11 +1,5 @@
 import { MagnifyingGlass } from 'react-loader-spinner';
-import styled from '@emotion/styled';
-
-const LoaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-`;
+import { LoaderWrapper } from './Loader.styled';
 
 const Loader = () => {
   return (

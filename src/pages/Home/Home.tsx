@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchTrending } from 'services/FetchFunctions';
+import fetchTrending from 'services/fetchTrending';
 import FilmList from 'components/FilmList/FilmList';
-import Status from 'services/Constants';
 import { Section } from './Home.styled';
+import Status from 'constants/constants';
 
 interface FilmsState {
   id: number;

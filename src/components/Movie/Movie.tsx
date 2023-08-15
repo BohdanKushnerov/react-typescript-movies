@@ -1,8 +1,17 @@
-import PropTypes from 'prop-types';
 import Progressbar from 'components/Progressbar/Progressbar';
 import { MovieWrap, InfoWrap, WrapBar, Title, SubTitle } from './Movie.styled';
 
-const Movie = ({ state }) => {
+type MovieProps = {
+  state: {
+    genres: string;
+    overview: string;
+    poster_path: string;
+    title: string;
+    vote_average: number;
+  };
+};
+
+const Movie: React.FC<MovieProps> = ({ state }) => {
   const { vote_average, overview, title, genres, poster_path } = state;
 
   return (
@@ -31,16 +40,6 @@ const Movie = ({ state }) => {
       </InfoWrap>
     </MovieWrap>
   );
-};
-
-Movie.propTypes = {
-  state: PropTypes.shape({
-    genres: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default Movie;

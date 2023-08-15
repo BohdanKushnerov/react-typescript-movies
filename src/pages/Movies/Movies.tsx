@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchSearchMovie } from 'services/FetchFunctions';
+import fetchSearchMovie from 'services/fetchSearchMovie';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
-import Status from 'services/Constants';
+import Status from 'constants/constants';
 
 interface Film {
   id: number;
@@ -22,7 +22,7 @@ const Movies: React.FC = () => {
 
   const filmName = searchParams.get('search');
 
-  const handleSubmit = (value: string) => {
+  const handleSubmit = (value: string): void => {
     setSearchParams({ search: value });
   };
 
@@ -33,7 +33,6 @@ const Movies: React.FC = () => {
 
     const abortController = new AbortController();
 
-    // IIFE
     (async function fetch() {
       setLoading(true);
       setStatus(Status.PENDING);

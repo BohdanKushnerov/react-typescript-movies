@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const Progressbar = ({ value, text }) => {
+type ProgressbarProps = {
+  value: number;
+  text: string;
+};
+
+const Progressbar: React.FC<ProgressbarProps> = ({ value, text }) => {
   const pathColor = (() => {
     switch (true) {
       case value >= 75:
@@ -44,11 +48,6 @@ const Progressbar = ({ value, text }) => {
       })}
     ></CircularProgressbar>
   );
-};
-
-Progressbar.propTypes = {
-  value: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
 };
 
 export default Progressbar;

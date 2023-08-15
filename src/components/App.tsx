@@ -4,8 +4,8 @@ import SharedLayout from './SharedLayout';
 const Home = lazy(() => import('../pages/Home/Home'));
 const Movies = lazy(() => import('../pages/Movies/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
-const Cast = lazy(() => import('../pages/MovieDetails/Cast'));
-const Reviews = lazy(() => import('../pages/MovieDetails/Reviews'));
+const Cast = lazy(() => import('../pages/MovieDetails/Cast/Cast'));
+const Reviews = lazy(() => import('../pages/MovieDetails/Reviews/Reviews'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 export const App: React.FC = () => {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchReviews } from 'services/FetchFunctions';
+import fetchReviews from 'services/fetchReviews';
 import ReviewList from 'components/ReviewList/ReviewList';
-import Status from 'services/Constants';
+import Status from 'constants/constants';
 
 type ReviewsState = {
   author: string;

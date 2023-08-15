@@ -1,7 +1,17 @@
-import PropTypes from 'prop-types';
 import { CommentList, ReviewItem, ReviewLink } from './ReviewList.styled';
 
-const ReviewList = ({ state }) => {
+type ReviewProps = {
+  state: ReviewObj[];
+};
+
+type ReviewObj = {
+  author: string;
+  content: string;
+  id: string;
+  url: string;
+};
+
+const ReviewList: React.FC<ReviewProps> = ({ state }) => {
   return (
     <CommentList>
       {state.map(({ author, content, id, url }) => {
@@ -17,17 +27,6 @@ const ReviewList = ({ state }) => {
       })}
     </CommentList>
   );
-};
-
-ReviewList.propTypes = {
-  state: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
 };
 
 export default ReviewList;

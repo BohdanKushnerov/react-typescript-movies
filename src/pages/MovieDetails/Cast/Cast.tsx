@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieCredits } from 'services/FetchFunctions';
+import fetchMovieCredits from 'services/fetchMovieCredits';
 import CastList from 'components/CastList/CastList';
-import Status from 'services/Constants';
+import Status from 'constants/constants';
 
 type CastState = {
   id: number;

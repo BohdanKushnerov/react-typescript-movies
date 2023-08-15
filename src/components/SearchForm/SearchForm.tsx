@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input, Button } from './SearchForm.styled';
 
-const SearchForm = ({ onSubmit }) => {
+type SearchFormProps = {
+  onSubmit: (searchText: string) => void;
+};
+
+const SearchForm: React.FC<SearchFormProps> = ({ onSubmit }) => {
   const [state, setState] = useState('');
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     setState(value.toLowerCase());
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     onSubmit(state);
@@ -32,10 +35,6 @@ const SearchForm = ({ onSubmit }) => {
       </Button>
     </Form>
   );
-};
-
-SearchForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchForm;
