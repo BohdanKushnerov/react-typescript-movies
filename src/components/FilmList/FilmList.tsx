@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import takePathto from 'utils/takePathto';
 import Progressbar from 'components/Progressbar/Progressbar';
 import {
   TrandingList,
@@ -23,16 +24,16 @@ type FilmListProps = {
 const FilmList: React.FC<FilmListProps> = ({ films }) => {
   const location = useLocation();
 
-  function takePathto(filmId: number) {
-    return location.pathname === '/' ? `movies/${filmId}` : `${filmId}`;
-  }
-
   return (
     <TrandingList>
       {films.map(({ id, original_title, vote_average, poster_path, title }) => {
         return (
           <Item key={id}>
-            <Link key={id} to={takePathto(id)} state={{ from: location }}>
+            <Link
+              key={id}
+              to={takePathto(id, location)}
+              state={{ from: location }}
+            >
               <Img src={poster_path} alt={title} width={220} height={330} />
               <Title>{original_title}</Title>
             </Link>

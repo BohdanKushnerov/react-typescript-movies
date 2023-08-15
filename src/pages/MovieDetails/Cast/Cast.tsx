@@ -18,7 +18,7 @@ const Cast: React.FC = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    const fetchCast = async () => {
+    (async function fetchCast() {
       setStatus(Status.PENDING);
       try {
         const moviesCredits = await fetchMovieCredits(movieId, abortController);
@@ -29,9 +29,7 @@ const Cast: React.FC = () => {
         setStatus(Status.REJECTED);
         console.log(error);
       }
-    };
-
-    fetchCast();
+    })();
 
     return () => {
       abortController.abort();

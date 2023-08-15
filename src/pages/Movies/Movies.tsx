@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import fetchSearchMovie from 'services/fetchSearchMovie';
+import fetchSearchMovies from 'services/fetchSearchMovies';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
@@ -33,12 +33,12 @@ const Movies: React.FC = () => {
 
     const abortController = new AbortController();
 
-    (async function fetch() {
+    (async function fetchMoviesWithSearch() {
       setLoading(true);
       setStatus(Status.PENDING);
 
       try {
-        const searchFilms = await fetchSearchMovie(filmName, abortController);
+        const searchFilms = await fetchSearchMovies(filmName, abortController);
 
         setData([...searchFilms]);
         setStatus(Status.RESOLVED);

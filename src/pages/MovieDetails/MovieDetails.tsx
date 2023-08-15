@@ -36,7 +36,7 @@ const MovieDetails: React.FC = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    (async function fetch() {
+    (async function fetchMovieDetails() {
       setStatus(Status.PENDING);
       try {
         const movie = await fetchMovie(movieId, abortController);

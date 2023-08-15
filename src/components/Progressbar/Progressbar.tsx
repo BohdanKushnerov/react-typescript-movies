@@ -1,5 +1,7 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import pathColor from './utils/pathColor';
+import trailColor from './utils/trailColor';
 
 type ProgressbarProps = {
   value: number;
@@ -7,32 +9,6 @@ type ProgressbarProps = {
 };
 
 const Progressbar: React.FC<ProgressbarProps> = ({ value, text }) => {
-  const pathColor = (() => {
-    switch (true) {
-      case value >= 75:
-        return '#21d07a';
-      case value <= 75 && value >= 25:
-        return '#d2d531';
-      case value <= 25 && value !== 0:
-        return '#db2360';
-      default:
-        return 'gray';
-    }
-  })();
-
-  const trailColor = (() => {
-    switch (true) {
-      case value >= 75:
-        return '#204529';
-      case value <= 75 && value >= 25:
-        return '#423d0f';
-      case value <= 25 && value !== 0:
-        return '#571435';
-      default:
-        return 'gray';
-    }
-  })();
-
   return (
     <CircularProgressbar
       value={value}
@@ -41,8 +17,8 @@ const Progressbar: React.FC<ProgressbarProps> = ({ value, text }) => {
       backgroundPadding={6}
       styles={buildStyles({
         textColor: 'white',
-        pathColor: pathColor,
-        trailColor: trailColor,
+        pathColor: pathColor(value),
+        trailColor: trailColor(value),
         backgroundColor: '#081c22',
         textSize: '35px',
       })}

@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-type Genre = {
-  id: number;
-  name: string;
-};
+import stringFromGanresArray from 'utils/stringFromGanresArray';
 
 async function fetchMovie(
   movieId: string | undefined,
@@ -25,12 +21,6 @@ async function fetchMovie(
       ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${poster_path}`
       : 'https://via.placeholder.com/300x450',
   };
-
-  function stringFromGanresArray(array: Genre[]) {
-    const string = array.reduce((acc, value) => (acc += value.name), '');
-
-    return string.split(/(?=[A-Z])/).join(', ');
-  }
 }
 
 export default fetchMovie;

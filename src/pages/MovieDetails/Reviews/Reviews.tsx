@@ -19,7 +19,7 @@ const Reviews: React.FC = () => {
   useEffect(() => {
     const abortController = new AbortController();
 
-    (async function fetch() {
+    (async function fetchReview() {
       setStatus(Status.PENDING);
       try {
         const moviesReviews = await fetchReviews(movieId, abortController);
